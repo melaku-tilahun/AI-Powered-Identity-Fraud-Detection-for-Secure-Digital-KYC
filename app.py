@@ -572,7 +572,7 @@ def render_results(result: dict, show_coordination_box: bool = False) -> None:
                     for k, v in all_preds.items()
                 ]
             )
-            st.dataframe(pred_df, use_container_width=True, hide_index=True)
+            st.dataframe(pred_df, hide_index=True)
 
     with engine_col3:
         st.markdown("### Graph Analytics")
@@ -627,7 +627,7 @@ def render_results(result: dict, show_coordination_box: bool = False) -> None:
     if graph_data:
         st.dataframe(
             pd.DataFrame(graph_data),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
     else:
@@ -705,7 +705,7 @@ Identity E ─────┘        |
             if metrics:
                 st.dataframe(
                     pd.DataFrame(metrics),
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True,
                 )
         except Exception as exc:
@@ -1043,7 +1043,7 @@ with tab_live:
     run_live = st.button(
         "Assess Risk",
         type="primary",
-        use_container_width=True,
+        width="stretch",
         key="run_live_btn",
     )
 
@@ -1142,7 +1142,7 @@ with tab_scenario:
 
     run_scenario = st.button(
         "Run Risk Assessment",
-        use_container_width=True,
+        width="stretch",
         type="primary",
         key="run_scenario_btn",
     )
