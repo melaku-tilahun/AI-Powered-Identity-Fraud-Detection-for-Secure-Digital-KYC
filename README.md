@@ -1,3 +1,15 @@
+---
+title: AI-Powered Identity Fraud Detection for Secure Digital KYC
+emoji: 🛡️
+colorFrom: blue
+colorTo: indigo
+sdk: streamlit
+sdk_version: 1.45.0
+app_file: app.py
+pinned: true
+license: mit
+---
+
 # AI-Powered Identity Fraud Detection for Secure Digital KYC: A Zero Trust Approach
 
 **Research Prototype** — 3rd Annual Cybersecurity Awareness Month Conference 2026  
