@@ -44,6 +44,117 @@ st.markdown(
         margin-bottom: 1.5rem;
     }
 
+    /* ---- Onboarding Process Flow ---- */
+    .flow-container {
+        display: flex;
+        align-items: flex-start;
+        gap: 0;
+        margin: 1rem 0 1.4rem 0;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+
+    .flow-step {
+        flex: 1;
+        min-width: 130px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 0.85rem 0.7rem;
+        background: #ffffff;
+        text-align: center;
+        opacity: 0;
+        animation: stepFadeIn 0.45s ease forwards;
+    }
+
+    .flow-step:nth-child(1) { animation-delay: 0.15s; }
+    .flow-step:nth-child(3) { animation-delay: 0.65s; }
+    .flow-step:nth-child(5) { animation-delay: 1.15s; }
+    .flow-step:nth-child(7) { animation-delay: 1.65s; }
+    .flow-step:nth-child(9) { animation-delay: 2.15s; }
+
+    @keyframes stepFadeIn {
+        from { opacity: 0; transform: translateY(7px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .flow-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #cbd5e1;
+        font-size: 1.2rem;
+        padding: 0 0.25rem;
+        margin-top: 2.2rem;
+        flex-shrink: 0;
+    }
+
+    .flow-step-num {
+        font-size: 0.58rem;
+        font-weight: 700;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.35rem;
+    }
+
+    .flow-step-icon {
+        font-size: 1.35rem;
+        margin-bottom: 0.35rem;
+        line-height: 1;
+    }
+
+    .flow-step-title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.25rem;
+        line-height: 1.3;
+    }
+
+    .flow-step-detail {
+        font-size: 0.63rem;
+        color: #64748b;
+        line-height: 1.45;
+    }
+
+    .flow-step.fayda-step {
+        border-color: #cbd5e1;
+        background: #f8fafc;
+    }
+
+    .flow-step.risk-step {
+        border-color: #1e293b;
+        border-width: 2px;
+        background: #f8fafc;
+    }
+
+    .flow-payload {
+        margin-top: 0.5rem;
+        padding: 0.4rem 0.5rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 5px;
+        background: #ffffff;
+        text-align: left;
+        font-size: 0.62rem;
+        color: #374151;
+        line-height: 1.7;
+    }
+
+    .flow-payload .pl {
+        color: #94a3b8;
+        font-size: 0.57rem;
+        display: block;
+    }
+
+    .flow-barrier {
+        margin-top: 0.45rem;
+        font-size: 0.6rem;
+        color: #94a3b8;
+        border-top: 1px dashed #e2e8f0;
+        padding-top: 0.4rem;
+        line-height: 1.4;
+    }
+
     /* ---- Fayda ID Card ---- */
     .fayda-card {
         border-radius: 10px;
@@ -756,52 +867,67 @@ with tab_live:
     )
 
     # ----------------------------------------------------------
-    # PHASE 1 — SIMULATED FAYDA RESPONSE
-    # Displayed read-only; auto-generated, not typed by the user.
+    # PHASE 1 — ONBOARDING PROCESS FLOW
+    # Animated step-by-step diagram: Customer → Fayda → CBE → Risk Engine
     # ----------------------------------------------------------
 
     st.markdown("---")
-    st.markdown("#### Step 1 — Fayda/eSignet Identity Verification")
-    st.caption(
-        "In production, this response arrives automatically from the "
-        "national ID system after the customer completes biometric "
-        "authentication. No identity attributes are entered manually."
-    )
-
-    live_id = st.session_state.live_identity_id
+    st.markdown("#### How Fayda/eSignet Fits the Onboarding Flow")
 
     st.markdown(
-        f"""
-        <div class="fayda-card">
-            <div class="fayda-card-header">
-                <div>
-                    <div class="brand">FAYDA</div>
-                    <div class="brand-sub">Federal Democratic Republic of Ethiopia &nbsp;|&nbsp; eSignet</div>
-                </div>
-                <div class="verified-badge">VERIFIED</div>
-            </div>
-            <div class="fayda-card-body">
-                <div class="fayda-photo">Photo<br>verified<br>biometric</div>
-                <div class="fayda-fields">
-                    <div class="fayda-row">
-                        <div class="fayda-label">Full Name</div>
-                        <div class="fayda-value">Abebe Kebede</div>
-                    </div>
-                    <div class="fayda-row">
-                        <div class="fayda-label">National ID</div>
-                        <div class="fayda-value mono">123456789</div>
-                    </div>
-                    <div class="fayda-row">
-                        <div class="fayda-label">Identity attributes</div>
-                        <div class="fayda-value" style="font-size:0.75rem;font-weight:400;color:#94a3b8;">Received by CBE &mdash; not passed to fraud-risk layer</div>
-                    </div>
-                </div>
-            </div>
-            <div class="fayda-card-footer">Simulated response &nbsp;&middot;&nbsp; No real Fayda infrastructure accessed</div>
-        </div>
-        """,
+        """
+<div class="flow-container">
+
+<div class="flow-step">
+<div class="flow-step-num">Step 1</div>
+<div class="flow-step-icon">&#128100;</div>
+<div class="flow-step-title">Customer Opens CBE App</div>
+<div class="flow-step-detail">Selects &ldquo;Open Account&rdquo; on the CBE digital channel</div>
+</div>
+
+<div class="flow-arrow">&#8594;</div>
+
+<div class="flow-step">
+<div class="flow-step-num">Step 2</div>
+<div class="flow-step-icon">&#8599;</div>
+<div class="flow-step-title">CBE Redirects to Fayda</div>
+<div class="flow-step-detail">OpenID Connect / eSignet redirect to the national identity portal</div>
+</div>
+
+<div class="flow-arrow">&#8594;</div>
+
+<div class="flow-step fayda-step">
+<div class="flow-step-num">Step 3</div>
+<div class="flow-step-icon">&#128274;</div>
+<div class="flow-step-title">Fayda Authenticates</div>
+<div class="flow-step-detail">Biometric check + OTP. Identity confirmed against the national registry</div>
+</div>
+
+<div class="flow-arrow">&#8594;</div>
+
+<div class="flow-step fayda-step">
+<div class="flow-step-num">Step 4</div>
+<div class="flow-step-icon">&#128228;</div>
+<div class="flow-step-title">Identity Payload &rarr; CBE</div>
+<div class="flow-step-detail">Fayda returns verified attributes to CBE onboarding system. Attributes are not passed to the risk engine</div>
+</div>
+
+<div class="flow-arrow">&#8594;</div>
+
+<div class="flow-step risk-step">
+<div class="flow-step-num">Step 5</div>
+<div class="flow-step-icon">&#9881;</div>
+<div class="flow-step-title">Risk Engine Begins</div>
+<div class="flow-step-detail">Device &middot; Session &middot; Network &middot; Behaviour signals evaluated by this prototype</div>
+</div>
+
+</div>
+""",
         unsafe_allow_html=True,
     )
+
+
+    live_id = st.session_state.live_identity_id
 
     # ----------------------------------------------------------
     # PHASE 2 — AUTOMATICALLY COLLECTED SIGNALS
@@ -811,13 +937,14 @@ with tab_live:
     # ----------------------------------------------------------
 
     st.markdown("---")
-    st.markdown("#### Step 2 — Automatically Collected Onboarding Signals")
+    st.markdown("#### Automatically Collected Onboarding Signals")
     st.caption(
         "These signals are collected automatically by CBE's onboarding "
         "platform — from device fingerprinting, session tracking, velocity "
         "counters, and behavioural analytics. Adjust them to explore how "
         "the risk engine responds to different onboarding contexts."
     )
+
 
     st.markdown(
         """
