@@ -39,15 +39,15 @@ def evaluate_rules(event):
     # -----------------------------------------------------
 
     add(
-        event.device_reuse_count >= 2,
+        event.device_reuse_count >= 1,
         15,
-        "Device is associated with multiple onboarding activities"
+        "Device has been used in a previous onboarding activity"
     )
 
     add(
-        event.device_reuse_count >= 5,
-        15,
-        "High device reuse detected"
+        event.device_reuse_count >= 2,
+        20,
+        "Device reuse detected — multiple identities registered from this device"
     )
 
     # -----------------------------------------------------
@@ -65,15 +65,15 @@ def evaluate_rules(event):
     # -----------------------------------------------------
 
     add(
-        event.registrations_24h >= 5,
+        event.registrations_24h >= 2,
         10,
-        "Elevated registration velocity detected"
+        "Elevated registration velocity — more than one registration in 24 hours"
     )
 
     add(
-        event.registrations_24h >= 10,
+        event.registrations_24h >= 4,
         15,
-        "Abnormally high registration velocity detected"
+        "High registration velocity — operationally suspicious volume within 24 hours"
     )
 
     # -----------------------------------------------------
@@ -81,15 +81,15 @@ def evaluate_rules(event):
     # -----------------------------------------------------
 
     add(
-        event.network_identity_count >= 3,
+        event.network_identity_count >= 2,
         10,
         "Multiple identities associated with the same network"
     )
 
     add(
-        event.network_identity_count >= 5,
+        event.network_identity_count >= 3,
         10,
-        "High network identity concentration detected"
+        "Network identity cluster detected — coordinated activity pattern"
     )
 
     # -----------------------------------------------------
@@ -129,9 +129,9 @@ def evaluate_rules(event):
     # -----------------------------------------------------
 
     add(
-        event.session_duration_seconds <= 30,
+        event.session_duration_seconds <= 45,
         10,
-        "Unusually short onboarding session detected"
+        "Unusually short onboarding session — insufficient time for legitimate completion"
     )
 
     # -----------------------------------------------------

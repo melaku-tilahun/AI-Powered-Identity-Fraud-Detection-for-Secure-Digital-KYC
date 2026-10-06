@@ -125,22 +125,22 @@ def get_demo_scenario(scenario: str) -> DemoEvent:
 
             identity_verified=True,
 
-            device_reuse_count=5,
+            device_reuse_count=2,
             identity_reuse_count=0,
-            registrations_24h=7,
-            network_identity_count=6,
+            registrations_24h=3,
+            network_identity_count=3,
 
-            automation_score=0.35,
-            behavior_score=0.58,
+            automation_score=0.42,
+            behavior_score=0.51,
 
-            session_duration_seconds=95,
+            session_duration_seconds=62,
 
             ip_address="10.10.20.31",
 
             metadata={
                 "description": (
-                    "Multiple identities are being registered "
-                    "from a reused device."
+                    "Multiple identities registered "
+                    "from a shared device within 24 hours."
                 ),
                 "expected_outcome": "additional_verification",
             },
@@ -165,8 +165,8 @@ def get_demo_scenario(scenario: str) -> DemoEvent:
 
             device_reuse_count=1,
             identity_reuse_count=0,
-            registrations_24h=12,
-            network_identity_count=4,
+            registrations_24h=5,
+            network_identity_count=3,
 
             automation_score=0.91,
             behavior_score=0.86,
@@ -177,8 +177,8 @@ def get_demo_scenario(scenario: str) -> DemoEvent:
 
             metadata={
                 "description": (
-                    "Rapid onboarding with highly automated "
-                    "interaction patterns."
+                    "Rapid automated onboarding "
+                    "with bot-like interaction patterns."
                 ),
                 "expected_outcome": "additional_verification",
             },
@@ -201,13 +201,13 @@ def get_demo_scenario(scenario: str) -> DemoEvent:
 
             identity_verified=True,
 
-            device_reuse_count=5,
+            device_reuse_count=2,
             identity_reuse_count=0,
-            registrations_24h=8,
-            network_identity_count=5,
+            registrations_24h=3,
+            network_identity_count=4,
 
-            automation_score=0.88,
-            behavior_score=0.92,
+            automation_score=0.82,
+            behavior_score=0.88,
 
             session_duration_seconds=21,
 
@@ -215,7 +215,7 @@ def get_demo_scenario(scenario: str) -> DemoEvent:
 
             metadata={
                 "description": (
-                    "Multiple individually valid identities are "
+                    "Multiple individually valid identities "
                     "connected through shared infrastructure."
                 ),
                 "expected_outcome": "hold",
@@ -304,7 +304,7 @@ def generate_synthetic_dataset(
         else:
 
             device_reuse = int(
-                rng.poisson(0.4)
+                rng.poisson(0.15)
             )
 
             registrations = int(

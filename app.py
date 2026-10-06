@@ -872,7 +872,7 @@ with tab_live:
     # ----------------------------------------------------------
 
     st.markdown("---")
-    st.markdown("#### How Fayda/eSignet Fits the Onboarding Flow")
+    st.markdown("#### Fayda/eSignet Onboarding Flow")
 
     st.markdown(
         """
@@ -881,7 +881,7 @@ with tab_live:
 <div class="flow-step">
 <div class="flow-step-num">Step 1</div>
 <div class="flow-step-icon">&#128100;</div>
-<div class="flow-step-title">Customer Opens CBE App</div>
+<div class="flow-step-title">Customer Opens bank App</div>
 <div class="flow-step-detail">Selects &ldquo;Open Account&rdquo; on the CBE digital channel</div>
 </div>
 
@@ -890,7 +890,7 @@ with tab_live:
 <div class="flow-step">
 <div class="flow-step-num">Step 2</div>
 <div class="flow-step-icon">&#8599;</div>
-<div class="flow-step-title">CBE Redirects to Fayda</div>
+<div class="flow-step-title">Bank Redirects to Fayda</div>
 <div class="flow-step-detail">OpenID Connect / eSignet redirect to the national identity portal</div>
 </div>
 
@@ -908,7 +908,7 @@ with tab_live:
 <div class="flow-step fayda-step">
 <div class="flow-step-num">Step 4</div>
 <div class="flow-step-icon">&#128228;</div>
-<div class="flow-step-title">Identity Payload &rarr; CBE</div>
+<div class="flow-step-title">Identity Payload &rarr; Bank</div>
 <div class="flow-step-detail">Fayda returns verified attributes to CBE onboarding system. Attributes are not passed to the risk engine</div>
 </div>
 
@@ -961,21 +961,21 @@ with tab_live:
         live_device_reuse = st.slider(
             "Device reuse count",
             min_value=0,
-            max_value=10,
+            max_value=5,
             value=0,
             help=(
                 "How many other identities have used this device fingerprint "
-                "to register in the past. Collected by the device fingerprinting service."
+                "to register. Any reuse ≥ 1 is a signal; ≥ 2 is high risk."
             ),
         )
         live_network_ids = st.slider(
             "Identities on same network",
             min_value=1,
-            max_value=15,
+            max_value=6,
             value=1,
             help=(
-                "How many other identities have registered from the same "
-                "IP/network range in the past 24 h. Collected by network correlation."
+                "How many identities have registered from the same "
+                "IP/network in the past 24 h. ≥ 2 is elevated; ≥ 3 is a cluster signal."
             ),
         )
 
@@ -983,11 +983,11 @@ with tab_live:
         live_registrations = st.slider(
             "Registrations from this network in last 24 h",
             min_value=1,
-            max_value=20,
+            max_value=8,
             value=1,
             help=(
-                "Total registration events seen from this network block in "
-                "the last 24 hours. Collected by the velocity counter."
+                "Registration events from this network block in the last 24 h. "
+                "≥ 2 is elevated; ≥ 4 is operationally suspicious."
             ),
         )
         live_session_secs = st.slider(
